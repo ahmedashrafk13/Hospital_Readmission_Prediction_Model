@@ -1,0 +1,11 @@
+# Generated model artifacts (rebuild with: python train.py)
+models/
+# Local datasets (place real UCI diabetic_data.csv here)
+data/*.csv
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+# Streamlit
+.streamlit/secrets.toml
