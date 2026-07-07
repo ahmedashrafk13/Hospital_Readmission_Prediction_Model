@@ -21,6 +21,34 @@ classifiers with formal statistical tests, and audits + corrects a racial
 - **Six-page app** — Home, EDA, Model Performance, Statistical Analysis,
   Fairness Dashboard, Single-Patient prediction (with SHAP), Batch prediction.
 
+## Results
+
+Trained on the **real UCI "Diabetes 130-US hospitals"** dataset (`seed=42`).
+
+| Metric | Value |
+| --- | --- |
+| Patient encounters | 101,766 |
+| Features | 20 |
+| 30-day readmission rate | 11.2% |
+| Train / Test split | 81,412 / 20,354 |
+| Models trained | 5 |
+
+**Model leaderboard** — metrics computed at each model's Youden-optimal threshold on the held-out test set, sorted by AUC:
+
+| Model | AUC | F1 | Accuracy | Precision | Recall |
+| --- | --- | --- | --- | --- | --- |
+| **Gradient Boosting** | **0.6465** | 0.2598 | 0.6408 | 0.1687 | 0.5649 |
+| XGBoost | 0.6453 | 0.2530 | 0.5717 | 0.1570 | 0.6499 |
+| LightGBM | 0.6445 | 0.2539 | 0.6224 | 0.1629 | 0.5760 |
+| Random Forest | 0.6408 | 0.2411 | 0.4628 | 0.1431 | 0.7649 |
+| Logistic Regression | 0.6402 | 0.2538 | 0.6252 | 0.1631 | 0.5711 |
+
+Best model by AUC: **Gradient Boosting**.
+
+**Fairness (Equal-Opportunity / TPR gap across racial groups)** — per-group threshold
+adjustment shrinks the gap from **18.1 pp → 1.5 pp** at **zero AUC cost** (0.6465
+before and after, since ranking is unchanged).
+
 ## Data
 
 The app first looks for the real UCI CSV at `data/diabetic_data.csv`
